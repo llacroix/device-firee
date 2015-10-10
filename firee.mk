@@ -1,12 +1,23 @@
 $(call inherit-product, device/qcom/msm8610/msm8610.mk)
 
 PRODUCT_COPY_FILES := \
+    device/qcom/msm8610/audio_policy.conf:system/etc/audio_policy.conf \
+    device/qcom/msm8610/media/media_codecs_8610.xml:system/etc/media_codecs.xml \
+    device/qcom/msm8610/media/media_profiles_8610.xml:system/etc/media_profiles.xml \
+    device/qcom/msm8610/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    device/qcom/msm8610/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    device/qcom/msm8610/WCNSS_qcom_wlan_nv.bin:persist/WCNSS_qcom_wlan_nv.bin \
+    device/qcom/msm8610/snd_soc_msm/snd_soc_msm_8x10_wcd:system/etc/snd_soc_msm/snd_soc_msm_8x10_wcd \
+    device/qcom/msm8610/snd_soc_msm/snd_soc_msm_8x10_wcd_skuaa:system/etc/snd_soc_msm/snd_soc_msm_8x10_wcd_skuaa \
+    device/qcom/msm8610/snd_soc_msm/snd_soc_msm_8x10_wcd_skuab:system/etc/snd_soc_msm/snd_soc_msm_8x10_wcd_skuab \
 	device/alcatel/firee/boot.ver:root/boot.ver \
 	device/alcatel/firee/init.rc:root/init.rc \
 	device/alcatel/firee/init.target.rc:root/init.target.rc \
 	device/alcatel/firee/fstab.qcom:root/fstab.qcom \
 
-GAIA_DEV_PIXELS_PER_PX := 1.5
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
+
+GAIA_DEV_PIXELS_PER_PX := 2
 
 PRODUCT_NAME := firee
 PRODUCT_DEVICE := firee
