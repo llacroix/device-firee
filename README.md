@@ -22,9 +22,9 @@ What needs to be done:
 
 - [x] Kernel build working
 - [x] Userdata build working (1.3)
+- [ ] Gecko build working (1.3)
 - [ ] Add the kernel sources (somewhere) and fix the manifest
-- [ ] B2G builds
-  - [ ] B2G boot
+- [ ] Add the gecko sources (somewhere) and fix manifest if necessary
 - [ ] Enable hidden soft buttons on the bottom of the display: The phone has 3 soft buttons with keycode (158 102 139). The alcatel 6015x is a clone of the alcatel onetouch idol 2 mini L (ot-6014x). The button works in ClockWorkMod recovery.
 
 Read more about the device in the [Wiki](https://github.com/llacroix/device-firee/wiki)
