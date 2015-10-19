@@ -22,7 +22,27 @@ What needs to be done:
 
 - [x] Kernel build working
 - [x] Userdata build working (1.3)
-- [ ] Gecko build working (1.3)
+- [x] What's working
+  - [x] Audio Headphones
+  - [x] Audio Speaker
+  - [x] Display 
+  - [x] Accelerometer
+  - [x] Gyroscope (not sure but the device shouldn't have them)
+  - [x] Internet (with wifi)
+  - [x] Wifi* (need to insert wlan.ko manually in init.rc)
+  - [x] Backlight
+  - [x] /storage/sdcard1
+- [ ] What's not working yet
+  - [ ] Radio FM (can seek but no sound yet)
+  - [ ] Radio GSM (Doesn't work. Cannot connect yet)
+  - [ ] Camera (camera hang and seems to be busy)
+  - [ ] Compass (might work)
+  - [ ] Bluetooth (Bluez)
+  - [ ] Audio Speaker telephony (Might work but no idea how to test it)
+  - [ ] Music playback (Seems to be missing codecs)
+  - [ ] Video playback (Seems to be missing codecs but video worked in an app)
+  - [ ] /storage/sdcard0
+  - [ ] Some apps think there is no sdcard (camera)
 - [ ] Add the kernel sources (somewhere) and fix the manifest
 - [ ] Add the gecko sources (somewhere) and fix manifest if necessary
 - [ ] Enable hidden soft buttons on the bottom of the display: The phone has 3 soft buttons with keycode (158 102 139). The alcatel 6015x is a clone of the alcatel onetouch idol 2 mini L (ot-6014x). The button works in ClockWorkMod recovery.
