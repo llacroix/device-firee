@@ -32,13 +32,13 @@ What needs to be done:
   - [x] Wifi* (need to insert wlan.ko manually in init.rc)
   - [x] Backlight
   - [x] /storage/sdcard1
+  - [x] Radio GSM / SMS / PhoneCalls
+  - [x] Audio Speaker telephony
 - [ ] What's not working yet
   - [ ] Radio FM (can seek but no sound yet)
-  - [ ] Radio GSM (Doesn't work. Cannot connect yet)
   - [ ] Camera (camera hang and seems to be busy)
   - [ ] Compass (might work)
   - [ ] Bluetooth (Bluez)
-  - [ ] Audio Speaker telephony (Might work but no idea how to test it)
   - [ ] Music playback (Seems to be missing codecs)
   - [ ] Video playback (Seems to be missing codecs but video worked in an app)
   - [ ] /storage/sdcard0
