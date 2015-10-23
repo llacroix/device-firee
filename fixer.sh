@@ -1,14 +1,5 @@
 #!/bin/sh
 
-# Copy files from a backup folder to the phone. Used to copy
-# proprietary files that weren't built during the building process
-# This script will get removed by an other script that will
-# sync a working device and moved the files to a folder
-# before building the image. This is used for development
-# purpose only. 
-#
-# In the future, update to this file shouldn't be necessary
-
 BASE_DIR="backup"
 TARGET="/system"
 
@@ -23,6 +14,14 @@ function copy_bins() {
             adb push "${BASE_DIR}/${FILE}" "${TARGET}/${FILE}"
             adb shell "chmod 755 ${TARGET}/${FILE}"
         fi
+    done
+}
+
+function copy_libs_forced() {
+    for FILE in $1
+    do
+        adb push "${BASE_DIR}/${FILE}" "${TARGET}/${FILE}"
+        adb shell "chmod 644 ${TARGET}/${FILE}"
     done
 }
 
@@ -50,154 +49,6 @@ adb shell "mkdir -p /system/vendor/lib/rfsa/adsp"
 
 #adb shell "stop b2g"
 
-# etc/init.qcom.coex.sh
-# vendor/lib/egl/eglsubAndroid.so
-# vendor/lib/egl/libEGL_adreno.so
-# vendor/lib/egl/libGLESv1_CM_adreno.so
-# vendor/lib/egl/libGLESv2_adreno.so
-# vendor/lib/egl/libq3dtools_adreno.so
-# vendor/lib/libgsl.so
-# vendor/lib/libadreno_utils.so
-# bin/irsc_util
-
-TEMP_BINS="
-    bin/thermal-engine
-    bin/qrngd
-    bin/adsprpcd
-    bin/cnd
-    bin/ATFWD-daemon
-    bin/mm-pp-daemon
-    bin/ssr_diag
-    bin/time_daemon
-    bin/qseecomd
-    bin/mm-qcamera-daemon
-    bin/audiod
-    bin/factory_test
-    bin/trace_util
-    bin/mverproxy
-    bin/temp_monitor
-    bin/nvdiag_daemon
-    bin/qmuxd
-    bin/rmt_storage
-    bin/netmgrd
-    bin/app_process
-    etc/install-recovery.sh
-    bin/ptt_socket_app
-    bin/cnd
-    bin/ATFWD-daemon
-    bin/ssr_diag
-    bin/qseecomd
-    bin/audiod
-    bin/factory_test
-    bin/location-mq
-    bin/xtwifi-inet-agent
-    bin/xtwifi-client
-    bin/lowi-server
-    bin/charger_monitor
-    bin/mpdecision
-    bin/AcdApiDaemon
-    bin/adsprpcd
-    bin/alsaucm_test
-    bin/amix
-    bin/aplay
-    bin/arec
-    bin/backup.sh
-    bin/bgservice
-    bin/bluetoothd
-    bin/brctl
-    bin/bridgemgrd
-    bin/btnvtool
-    bin/bt_radio_run
-    bin/bt_radio_stop
-    bin/btTx_run
-    bin/btTx_start
-    bin/charger_monitor
-    bin/crda
-    bin/curl
-    bin/diag_callback_client
-    bin/diag_dci_sample
-    bin/diag_klog
-    bin/diag_mdlog
-    bin/diag_socket_log
-    bin/diag_uart_log
-    bin/dsdnsutil
-    bin/ds_fmc_appd
-    bin/dun-server
-    bin/ebtables
-    bin/fmconfig
-    bin/fmfactorytest
-    bin/fmfactorytestserver
-    bin/fm_qsoc_patches
-    bin/fsck_msdos
-    bin/ftmdaemon
-    bin/garden_app
-    bin/gpsone_daemon
-    bin/gps_test
-    bin/gsiff_daemon
-    bin/hci_qcomm_init
-    bin/install-recovery.sh
-    bin/iperf
-    bin/irsc_util
-    bin/location-mq
-    bin/lowi-server
-    bin/mcDriverDaemon
-    bin/mm-audio-ftm
-    bin/mmitest
-    bin/mm-jpeg-dec-test
-    bin/mm-jpeg-enc-test
-    bin/mm-jpeg-enc-test-client
-    bin/mm-pp-daemon
-    bin/mm-qcamera-app
-    bin/mm-qcamera-daemon
-    bin/mm-qjpeg-dec-test
-    bin/mm-qjpeg-enc-test
-    bin/mm-qomx-idec-test
-    bin/mm-qomx-ienc-test
-    bin/mpdecision
-    bin/mtpd
-    bin/mverproxy
-    bin/netmgrd
-    bin/nl_listener
-    bin/n_smux
-    bin/nvdiag_client
-    bin/nvdiag_daemon
-    bin/nvrw
-    bin/pand
-    bin/PktRspTest
-    bin/port-bridge
-    bin/pppd
-    bin/ptt_socket_app
-    bin/qcom-system-daemon
-    bin/qmiproxy
-    bin/qmuxd
-    bin/qrngd
-    bin/qrngp
-    bin/qrngtest
-    bin/quipc_igsn
-    bin/quipc_main
-    bin/radish
-    bin/regdbdump
-    bin/restore.sh
-    bin/rfs_access
-    bin/rmt_storage
-    bin/sapd
-    bin/sdptool
-    bin/subsystem_ramdump
-    bin/temp_monitor
-    bin/test_diag
-    bin/thermal-engine
-    bin/time_daemon
-    bin/trace_debug
-    bin/trace_util
-    bin/updater
-    bin/usbhub
-    bin/usbhub_init
-    bin/wdsdaemon
-    bin/wifitest
-    bin/xtwifi-client
-    bin/xtwifi-inet-agent
-    "
-
 PUSH_BINS="
     bin/irsc_util
     bin/netmgrd
@@ -216,6 +67,7 @@ PUSH_BINS="
     bin/mpdecision
     bin/mm-qcamera-daemon
     bin/fsck_msdos
+    bin/newfs_msdos
     bin/mverproxy
     bin/trace_util
     bin/thermal-engine
@@ -223,8 +75,13 @@ PUSH_BINS="
     bin/temp_monitor
     bin/nvdiag_daemon
     bin/nvdiag_client
+    bin/hci_qcomm_init
+    bin/btnvtool
     "
-# bin/rfs_access
+#Not sure what it does
+#    bin/location-mq
+# Probably not necessary
+# bin/bluetoothd
 
 PUSH_LIBS="
     vendor/lib/libqc-opt.so
@@ -365,105 +222,45 @@ PUSH_LIBS="
     lib/bluez-plugin/bluetooth-health.so
     lib/bluez-plugin/input.so
     lib/bluez-plugin/network.so
-    "
-# vendor/lib/rfsa/adsp/libadsp_denoise_skel.so
-# vendor/lib/rfsa/adsp/libadsp_jpege_skel.so
-
-TEMP_LIBS="
-    lib/bluez-plugin
-    lib/crda
-    lib/libacdapi_azi.so
-    lib/liballjoyn.so
-    lib/libalsa-intf.so
-    lib/libandroid.so
-    lib/libantradio.so
-    lib/libaudioeffect_jni.so
-    lib/libbcc.sha1.so
-    lib/libbcc.so
-    lib/libbcinfo.so
-    lib/libbluedroid.so
+    vendor/lib/libgeofence.so
+    vendor/lib/libqcci_legacy.so
+    vendor/lib/libtime_genoff.so
+    vendor/lib/libdsi_netctrl.so
+    vendor/lib/libqdi.so
+    vendor/lib/libqdp.so
+    vendor/lib/libdsnetutils.so
+    lib/libloc_eng.so
+    lib/libloc_core.so
+    lib/libgps.utils.so
+    etc/sap.conf
+    lib/libloc_api_v02.so
+    lib/libloc_ds_api.so
+    lib/libloc_xtra.so
+    vendor/lib/liblocationservice.so
+    vendor/lib/libloc_ext.so
+    etc/xtwifi.conf
     lib/libbluetoothd.so
     lib/libbluetooth.so
-    lib/libbson.so
     lib/libbtio.so
-    lib/libchromatix_imx135_liveshot.so
-    lib/libclcore.bc
-    lib/libclcore_debug.bc
-    lib/libclcore_neon.bc
-    lib/libcnefeatureconfig.so
-    lib/libcompiler_rt.so
-    lib/libcurl.so
-    lib/libdrm1_jni.so
-    lib/libebt_802_3.so
-    lib/libebtable_broute.so
-    lib/libebtable_filter.so
-    lib/libebtable_nat.so
-    lib/libebt_among.so
-    lib/libebt_arpreply.so
-    lib/libebt_arp.so
-    lib/libebtc.so
-    lib/libebt_ip6.so
-    lib/libebt_ip.so
-    lib/libebt_limit.so
-    lib/libebt_log.so
-    lib/libebt_mark_m.so
-    lib/libebt_mark.so
-    lib/libebt_nat.so
-    lib/libebt_nflog.so
-    lib/libebt_pkttype.so
-    lib/libebt_redirect.so
-    lib/libebt_standard.so
-    lib/libebt_stp.so
-    lib/libebt_ulog.so
-    lib/libebt_vlan.so
-    lib/libexif_jni.so
-    lib/libexif.so
-    lib/libFFTEm.so
-    lib/libGLESv3.so
     lib/libglib.so
-    lib/libgps.utils.so
-    lib/libhwui.so
-    lib/libjnigraphics.so
-    lib/libLLVM.so
-    lib/libloc_api_v02.so
-    lib/libloc_core.so
-    lib/libloc_ds_api.so
-    lib/libloc_eng.so
-    lib/libloc_xtra.so
-    lib/libMcClient.so
-    lib/libMcRegistry.so
-    lib/libmmcamera_interface.so
-    lib/libmmjpeg_interface.so
-    lib/libmm-qcamera.so
-    lib/libnvdiag_client.so
-    lib/libnvrw.so
-    lib/libOmxAacEnc.so
-    lib/libOmxAmrEnc.so
-    lib/libOmxEvrcEnc.so
-    lib/libOmxQcelp13Enc.so
-    lib/libOmxVdecHevc.so
-    lib/libPaApi.so
-    lib/libqomx_core.so
     lib/librecovery.so
-    lib/libRScpp.so
-    lib/libRSCpuRef.so
-    lib/libRSDriver.so
-    lib/libRS.so
-    lib/libsoundpool.so
-    lib/libSR_AudioIn.so
-    lib/libstlport_shared.so
-    lib/libstm-log.so
-    lib/libsuapp_d_native.so
-    lib/libsurfaceflinger_ddmconnection.so
-    lib/libtinyxml.so
-    lib/libtraceability.so
-    lib/libxml2.so
+    "
+#   b2g/distribution/bundles/libqc_b2g_ril/SmsHelper.js
+#   b2g/distribution/bundles/libqc_b2g_ril/chrome.manifest
+#   b2g/distribution/bundles/libqc_b2g_ril/libqc_b2g_ril.so
+#   b2g/distribution/bundles/libqc_b2g_ril/content_helper
+#   b2g/distribution/bundles/libqc_b2g_ril/content_helper/QCMessageManager.js
+#   b2g/distribution/bundles/libqc_b2g_ril/content_helper/QCTimeService.js
+#   b2g/distribution/bundles/libqc_b2g_ril/content_helper/QCContentHelper.js
+#   b2g/distribution/bundles/libqc_b2g_ril/libqc_b2g_ril.xpt
+#   b2g/distribution/bundles/libqc_b2g_ril/interfaces.manifest
+
+FORCED_LIBS="
+    etc/snd_soc_msm/snd_soc_msm_8x10_wcd_skuaa
     "
 
-
-#copy_bins "$TEMP_BINS"
-#copy_libs "$TEMP_LIBS"
 copy_libs "$PUSH_LIBS"
+copy_libs_forced "$FORCED_LIBS"
 copy_bins "$PUSH_BINS"
 
 #adb shell "start b2g"
