@@ -404,6 +404,8 @@ on boot
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
 
+    insmod /system/lib/modules/wlan.ko
+
     class_start core
     class_start main
 

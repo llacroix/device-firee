@@ -17,6 +17,16 @@ PRODUCT_COPY_FILES := \
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.moz.fm.noAnalog=true \
+    ro.moz.nfc.enabled=false \
+    ro.moz.devinputjack=1 \
+    ro.moz.ril.0.network_types=gsm,wcdma \
+    ro.moz.ril.emergency_by_default=true \
+    ro.moz.ril.numclients=1 \
+    ro.moz.ril.subscription_control=true \
+    org.bluez.device.conn.type=array \
+
 GAIA_DEV_PIXELS_PER_PX := 2
 
 PRODUCT_NAME := firee
