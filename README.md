@@ -35,9 +35,9 @@ What needs to be done:
   - [x] Radio GSM / SMS / PhoneCalls
   - [x] Audio Speaker telephony
   - [x] GPS (works with an internet connection using a-gps, using simplay gps without internet doesn't seem to work)
+  - [x] Camera (photo/video) Not sure if it's saving them yet
 - [ ] What's not working yet
   - [ ] Radio FM (can seek but no sound yet)
-  - [ ] Camera (camera hang and seems to be busy)
   - [ ] Compass (might work)
   - [ ] Bluetooth (Bluez)
     - [ ] Bluetooth loads correctly but b2g doesn't seem to care about it. No errors... just doesn't work no log in adb
@@ -46,11 +46,11 @@ What needs to be done:
   - [ ] Sound
     - [ ] Cannot set the volume out of speakers
     - [ ] Music app cannot play music (problem with output device)
-  - [ ] Microphone
+  - [ ] Microphone (Works but problem could be related to sdcard missing)
     - [ ] Cannot record a stream from microphone (could affect recording any stream)
   - [ ] Video playback (Seems to be missing codecs but video worked in an app)
   - [ ] /storage/sdcard0 (vold doesn't seem to work correctly, sdcard0 is created but not mounted)
-  - [ ] Some apps think there is no sdcard (camera)
+  - [ ] Some apps think there is no sdcard
 - [ ] Make a script to backup the device and copy backed up files to the system partition during build time.
 - [ ] Add the kernel sources (somewhere) and fix the manifest
 - [ ] Add the gecko sources (somewhere) and fix manifest if necessary
