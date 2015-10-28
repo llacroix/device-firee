@@ -12,7 +12,11 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 1140800000
 BOARD_CACHEIMAGE_PARTITION_SIZE := 75400000
 
 # Enable alsa
-BOARD_USES_ALSA_AUDIO := true
+# Cannot build those libraries yet the are needed
+# We're missing the vendor code which makes it hard to 
+# complete the build of alsa libraries
+# BOARD_USES_ALSA_AUDIO := true
+# TARGET_USES_QCOM_MM_AUDIO := true
 
 # Add support for wifi
 BOARD_HAS_QCOM_WLAN := true
