@@ -538,6 +538,10 @@ service media /system/bin/mediaserver
     group audio camera inet net_bt net_bt_admin net_bw_acct drmrpc mediadrm qcom_diag
     ioprio rt 4
 
+service sdcard /system/bin/sdcard -u 1023 -g 1023 /data/media /storage/sdcard0
+    class main
+    user system
+
 service bootanim /system/bin/bootanimation
     class main
     user graphics
