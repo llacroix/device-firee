@@ -1,5 +1,6 @@
 include device/qcom/msm8610/BoardConfig.mk
 
+TARGET_USES_ION := true
 
 #BOARD_BOOTIMAGE_PARTITION_SIZE := 15728640
 #BOARD_SYSTEMIMAGE_PARTITION_SIZE := 377487360
@@ -11,12 +12,18 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 377400000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1140800000
 BOARD_CACHEIMAGE_PARTITION_SIZE := 75400000
 
+TARGET_PROVIDES_INIT_RC := false
+BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BLUEZ := true
+BOARD_BLUETOOTH_DOES_NOT_USE_RFKILL := true
+
 # Enable alsa
 # Cannot build those libraries yet the are needed
 # We're missing the vendor code which makes it hard to 
 # complete the build of alsa libraries
 # BOARD_USES_ALSA_AUDIO := true
 # TARGET_USES_QCOM_MM_AUDIO := true
+# BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
 # Add support for wifi
 BOARD_HAS_QCOM_WLAN := true

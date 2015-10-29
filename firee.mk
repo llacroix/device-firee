@@ -11,7 +11,6 @@ PRODUCT_COPY_FILES := \
     device/qcom/msm8610/snd_soc_msm/snd_soc_msm_8x10_wcd_skuaa:system/etc/snd_soc_msm/snd_soc_msm_8x10_wcd_skuaa \
     device/qcom/msm8610/snd_soc_msm/snd_soc_msm_8x10_wcd_skuab:system/etc/snd_soc_msm/snd_soc_msm_8x10_wcd_skuab \
 	device/alcatel/firee/boot.ver:root/boot.ver \
-	device/alcatel/firee/init.rc:root/init.rc \
 	device/alcatel/firee/init.target.rc:root/init.target.rc \
 	device/alcatel/firee/fstab.qcom:root/fstab.qcom \
 
