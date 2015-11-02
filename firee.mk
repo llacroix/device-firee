@@ -25,11 +25,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.moz.ril.numclients=1 \
     ro.moz.ril.subscription_control=true \
     org.bluez.device.conn.type=array \
+	persist.audio.fluence.mode=endfire \
+	ro.qc.sdk.audio.fluencetype=fluence \
+	ro.qc.sdk.izat.service_mask=0x9 \
+	persist.gps.qc_nlp_in_use=0 \
+	diag.reset_handler=true \
+	ro.assisted_gps_enabled=0 \
+	ro.qc.sdk.izat.premium_enabled=1 \
+	ro.gps.agps_provider=1 \
+	persist.sys.ssr.enable_debug=true \
 
 GAIA_DEV_PIXELS_PER_PX := 2
 
-PRODUCT_NAME := firee
-PRODUCT_DEVICE := firee
+PRODUCT_NAME := msm8610
+PRODUCT_DEVICE := msm8610
 PRODUCT_BRAND := qcom
 PRODUCT_MANUFACTURER := alcatel
-PRODUCT_MODEL := firee
+PRODUCT_MODEL := msm8610
