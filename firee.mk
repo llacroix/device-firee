@@ -13,6 +13,13 @@ PRODUCT_COPY_FILES := \
 	device/alcatel/firee/boot.ver:root/boot.ver \
 	device/alcatel/firee/init.target.rc:root/init.target.rc \
 	device/alcatel/firee/fstab.qcom:root/fstab.qcom \
+	system/bluetooth/data/main.conf:system/etc/bluetooth/main.conf \
+	system/bluetooth/data/input.conf:system/etc/bluetooth/input.conf \
+	system/bluetooth/data/blacklist.conf:system/etc/bluetooth/blacklist.conf \
+	system/bluetooth/data/network.conf:system/etc/bluetooth/network.conf \
+	system/bluetooth/data/audio.conf:system/etc/bluetooth/audio.conf \
+	system/bluetooth/data/auto_pairing.conf:system/etc/bluetooth/auto_pairing.conf \
+
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
 
@@ -37,7 +44,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 GAIA_DEV_PIXELS_PER_PX := 2
 
-PRODUCT_NAME := msm8610
+PRODUCT_NAME := firee
 PRODUCT_DEVICE := msm8610
 PRODUCT_BRAND := qcom
 PRODUCT_MANUFACTURER := alcatel
